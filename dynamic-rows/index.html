@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            var tID = jQuery('table#datatable');
+            jQuery('input.addrow').click(function () {
+                var rowlength = jQuery('table#datatable tr').length;
+                var sno = Number(jQuery(tID).find('tr:last .num').text().trim());
+                var lastrow = jQuery(tID).find('tr:last').clone().appendTo(tID);
+                console.log(rowlength);
+                if (rowlength == 1) {
+                    lastrow.find('td').text('');
+                    lastrow.find('td:first').append('<span class="num">1</span>');
+                    lastrow.find('td:last').append('<input type="button" value="Delete Row" class="deleterow" />');
+                }
+                else {
+                    lastrow.find('.num').text(sno + 1);
+                }
+            })
+            function regroup() {
+                jQuery('table#datatable tr').each(function (i) {
+                    jQuery(jQuery(this).find('td span')).html(i);
+                });
+            }
+            jQuery('table#datatable').on('click', '.deleterow', function (e) {
+                jQuery(this).parents('tr').remove();
+                regroup();
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" value="Add Row" class="addrow" />
+    <div class="container">
+        <table id="datatable" width="350px" border="2">
+            <tr>
+                <td>serial number</td>
+                <td>action</td>
+            </tr>
+            <tr>
+                <td><span class="num">1</span></td>
+                <td> <input type="button" value="Delete Row" class="deleterow" /></td>
+            </tr>
+        </table>
+    </div>
+    <style>
+        table#datatable {
+            width: 350px;
+            /* border: 0; */
+        }
+
+        td {
+            width: 50%;
+            height: 38px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        input[type='button'] {
+            height: 25px;
+            line-height: 1;
+            width: 150px;
+            margin: 0 auto;
+            text-align: center;
+            background: #76d4ff;
+            color: #fff;
+        }
+
+        table#datatable tr:first-child td {
+            background: #84d9ff;
+            color: #fff;
+            text-transform: capitalize;
+        }
+    </style>
+</body>
+
+</html>

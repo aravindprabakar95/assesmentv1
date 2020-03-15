@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <script type="text/JavaScript">
+document.addEventListener('DOMContentLoaded', function () {
+
+
+            var ctx = document.getElementById('canvas').getContext('2d');
+            var x,y;
+            var width = 300;
+            var height = 75;
+            x = Math.floor((Math.random() * 500) + 1);
+            y = Math.floor((Math.random() * 500) + 1);
+               
+            // context.fillRect(x, y, width, height);
+           function drawRectangle(x,y,w,h){
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(x, y, w, h);
+            }
+            function shiftLeftRectangle(x,y,w,h) {
+                drawRectangle(x, y, width, height);
+            }
+        
+        
+            document.getElementsByClassName('drawrect')[0].addEventListener("click", function(){
+        
+                drawRectangle(x, y, width, height);
+            });
+            document.getElementsByClassName('shiftLeft')[0].addEventListener("click", function(){
+                //alert(x,y)
+                x-=20;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawRectangle(x, y, width, height);
+            });
+            document.getElementsByClassName('shiftRight')[0].addEventListener("click", function(){
+                //alert(x,y)
+                x+=20;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawRectangle(x, y, width, height);
+            });
+            document.getElementsByClassName('delrect')[0].addEventListener("click", function(){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                x = Math.floor((Math.random() * 500) + 1);
+                y = Math.floor((Math.random() * 500) + 1);
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <button type="button" class="drawrect">Draw</button>
+    <button type="button" class="shiftLeft">Shift Left</button>
+    <button type="button" class="shiftRight">Shift Right</button>
+    <button type="button" class="delrect">Delete</button>
+    <canvas id="canvas" width="1024" height="600"></canvas>
+
+    <style>
+        canvas#canvas {
+            background: #37c1ff;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 180px;
+            height: 35px;
+            line-height: 1;
+            color: #fff;
+            background: #6dcffb;
+            cursor: pointer;
+        }
+
+        body {
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>
